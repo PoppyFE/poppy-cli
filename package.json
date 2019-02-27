@@ -1,0 +1,16 @@
+{
+  "name": "poppy-cli",
+  "version": "1.0.0",
+  "main": "./src/index.js",
+  "bin": {
+    "poppy": "./bin/poppy"
+  },
+  "repository": "git@github.com:ValueFE/poppy-cli.git",
+  "author": "alex zhang <gzane24@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.3.3",
+    "commander": "^2.19.0",
+    "git-download": "^0.0.2"
+  }
+}
