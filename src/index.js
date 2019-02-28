@@ -11,8 +11,18 @@ process.title = 'poppy';
 program._name = process.title;
 program.version(pkg.version);
 program.pkg = pkg;
-program.logger = (msg) => {
-  console.info(colors.green(`[poppy-cli]: ${msg}`));
+program.logger = (msg, opts) => {
+  let content = msg;
+  if (!opts || !opts.notitle) {
+    content = '[poppy-cli]: ' + content;
+  }
+
+  let colorName = 'green';
+  if (opts && opts.color && colors.hasOwnProperty(opts.color)) {
+    colorName = opts.color;
+  }
+
+  console.info(colors[colorName](content));
 };
 
 // here is fulfill commands
