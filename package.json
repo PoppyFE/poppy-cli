@@ -1,6 +1,6 @@
 {
   "name": "poppy-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "./src/index.js",
   "bin": {
     "poppy": "./bin/poppy"
@@ -15,5 +15,8 @@
     "copyfiles2": "^2.1.0",
     "cross-spawn": "^6.0.5",
     "gitignore-globs": "^0.1.1"
-  }
+  },
+  "files": [
+    "src"
+  ]
 }
