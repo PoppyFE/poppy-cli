@@ -11,6 +11,7 @@
   "dependencies": {
     "colors": "^1.3.3",
     "commander": "^2.19.0",
-    "git-download": "^0.0.2"
+    "copyfiles2": "^2.1.0",
+    "ensure-git-repo": "^1.0.1"
   }
 }
