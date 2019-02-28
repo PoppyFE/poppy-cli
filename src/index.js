@@ -10,6 +10,10 @@ process.title = 'poppy';
 
 program._name = process.title;
 program.version(pkg.version);
+program.pkg = pkg;
+program.logger = (msg) => {
+  console.info(colors.green(`[poppy-cli]: ${msg}`));
+};
 
 // here is fulfill commands
 
