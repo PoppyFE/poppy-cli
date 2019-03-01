@@ -36,7 +36,7 @@ Commands:
 create new project from `poppy-react-native` and `poppy-plugins-audio`
 
 ```shell
-poppy sync poppy-react-native poppy-plugins-audio
+poppy sync . poppy-react-native poppy-plugins-audio
 ```
 
 
