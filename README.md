@@ -6,7 +6,7 @@
 
 + make template project easily.
 + make normalized code,config,config,flow
-+ support `.poppyignore` to customize project logic.
++ support `.poppyignore` (`.gitignore` like) to customize project logic.
 + support `project` & `plugins` structure to organize assets
 
 ## Installation
