@@ -10,40 +10,50 @@ const gitPullOrClone = require('../utils/ensure-git-repo');
 // command args '<>' is must
 // command args '[]' is options
 program
-  .command('sync <project_name> <dest_dir>')
+  .command('sync <dest_dir> <project_name...>')
   .description('sync the project from poppy repo')
   .option('-g, --ignore', 'ignore the .poppyrc file')
   .option('-v, --verbose', 'verbose the progress')
-  .action(async function(projectName, destDir, opts) {
+  .action(async function(destDir, projectNames, opts) {
     // console.log('sdfsdfsadadasdasd');
     // console.log('exec "%s" using %s mode', value, options.exec_mode);
     // console.log(project_name, dir);
-    program.logger(`sync project ${projectName} to ${destDir}`);
+    // console.log(projectNames, destDir)
+    program.logger(`sync project ${projectNames.join(' ')} to ${destDir}`);
     const poppyDir = path.join(os.homedir(), '.poppy');
-    await syncRepo(poppyDir, projectName);
-    await copyFiles(poppyDir, projectName, destDir, opts.ignore);
+    await syncRepo(poppyDir);
+
+    for (const projectName of projectNames) {
+      console.log(projectName);
+      validProjectName(poppyDir, projectName);
+    }
+
+    for (const projectName of projectNames) {
+      await copyFiles(poppyDir, projectName, destDir, opts.ignore);
+    }
+
     program.logger(`Success`);
-  })
-  .on('--help', function() {
-    console.log('  Example:');
-    console.log("  create test.md -p -A 'Alex' -t 'Example'");
-    console.log('');
-    console.log('');
   });
+  // .on('--help', function() {
+  //   console.log('  Example:');
+  //   console.log("  create test.md -p -A 'Alex' -t 'Example'");
+  //   console.log('');
+  //   console.log('');
+  // });
 
+function validProjectName(poppyDir, projectName) {
+  if (!fs.existsSync(path.join(poppyDir, projectName))) {
+   throw new Error(`Error projectName (${projectName}) Error Not Exists`)
+  }
+}
 
-async function syncRepo(poppyDir, projectName) {
+async function syncRepo(poppyDir) {
   await new Promise((resolve, reject)=>{
     gitPullOrClone('git@e.coding.net:value/ifpay-poppy.git',
       poppyDir, err => {
         if (err) {
           console.error(err.stack);
           reject(reject);
-          return;
-        }
-
-        if (!fs.existsSync(path.join(poppyDir, projectName))) {
-          reject(new Error(`Error projectName (${projectName}) Error Not Exists`));
           return;
         }
 
